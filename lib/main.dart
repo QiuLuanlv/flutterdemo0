@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('flutter comeon!'),
+          title: Text('flutter comeon!!'),
         ),
         body: RouteNavigator(),
       ),

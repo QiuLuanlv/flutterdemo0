@@ -8,6 +8,7 @@ class GesturePage extends StatefulWidget {
 
 class _GesturePageState extends State<GesturePage> {
   String printString='';
+  double movex=0,movey=0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -45,9 +46,22 @@ class _GesturePageState extends State<GesturePage> {
                             style:TextStyle(fontSize: 36,color: Colors.white),
                       ),
                     ),
-                  )
+                  ),
+                  Text(printString)
                 ],
-              )
+              ),
+              Positioned(
+                left: movex,
+                top: movey,
+                child: GestureDetector(
+                  onPanUpdate: (e)=>_doMove(e),
+                  child: Container(
+                    width: 72,
+                    height: 72,
+                    decoration: BoxDecoration(color:Colors.amber,borderRadius: BorderRadius.circular(36)),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -58,6 +72,13 @@ class _GesturePageState extends State<GesturePage> {
   _printMsg(String msg) {
     setState(() {
       printString+' ,$msg';
+    });
+  }
+
+  _doMove(e) {
+    setState(() {
+      movey+=e.delte.dy;
+      movex+=e.delte.dx;
     });
   }
 }
