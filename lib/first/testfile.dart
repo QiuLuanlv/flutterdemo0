@@ -70,15 +70,17 @@ class _GesturePageState extends State<GesturePage> {
   }
 
   _printMsg(String msg) {
+
     setState(() {
-      printString+' ,$msg';
+      printString+=' ,$msg';
     });
+    print(printString);
   }
 
   _doMove(e) {
     setState(() {
-      movey+=e.delte.dy;
-      movex+=e.delte.dx;
+      movey+=e.delta.dy;
+      movex+=e.delta.dx;
     });
   }
 }
