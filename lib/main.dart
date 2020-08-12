@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'first/appLifecycle.dart';
 import 'first/launcher.dart';
 import 'first/respage.dart';
 import 'first/testfile.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         'GesturePage':(BuildContext context) =>GesturePage(),
         'ResPage':(BuildContext context) =>ResPage(),
         'Launcher':(BuildContext context) =>Launcher(),
+        'AppLifecycle':(BuildContext context) =>AppLifecycle(),
       },
     );
   }
@@ -53,6 +55,7 @@ class _RouteNavigatorState extends State<RouteNavigator> {
           _item('string1',GesturePage(),'GesturePage'),
           _item('string2',ResPage(),'ResPage'),
           _item('string3',Launcher(),'Launcher'),
+          _item('string4',AppLifecycle(),'AppLifecycle'),
         ],
       ),
     );
