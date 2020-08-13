@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'first/appLifecycle.dart';
 import 'first/launcher.dart';
+import 'first/photoApp.dart';
 import 'first/respage.dart';
 import 'first/testfile.dart';
 
@@ -56,6 +57,7 @@ class _DynamicThemeState extends State<DynamicTheme> {
         'ResPage': (BuildContext context) => ResPage(),
         'Launcher': (BuildContext context) => Launcher(),
         'AppLifecycle': (BuildContext context) => AppLifecycle(),
+        'PhotoApp': (BuildContext context) => PhotoApp(),
       },
     );
   }
@@ -83,10 +85,11 @@ class _RouteNavigatorState extends State<RouteNavigator> {
               });
             },
           ),
-          _item('string1', GesturePage(), 'GesturePage'),
-          _item('string2', ResPage(), 'ResPage'),
-          _item('string3', Launcher(), 'Launcher'),
-          _item('string4', AppLifecycle(), 'AppLifecycle'),
+          _item('点击', GesturePage(), 'GesturePage'),
+          _item('手势', ResPage(), 'ResPage'),
+          _item('第三方应用', Launcher(), 'Launcher'),
+          _item('周期', AppLifecycle(), 'AppLifecycle'),
+          _item('拍照', PhotoApp(), 'PhotoApp'),
         ],
       ),
     );
