@@ -9,14 +9,18 @@ class PhotoApp extends StatefulWidget {
 }
 
 class _PhotoAppState extends State<PhotoApp> {
-  File _image;
-  Future getImage() async{
-    var image =await ImagePicker.pickImage(source: ImageSource.camera);
+  List<File> _images = [];
+
+  Future getImage(bool isTakePhoto) async {
+    Navigator.pop(context);
+    var image = await ImagePicker.pickImage(
+        source: isTakePhoto ? ImageSource.camera : ImageSource.gallery);
     setState(() {
-    _image = image;
+      _images.add(image);
     });
     print('拍照结果${image}');
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,12 +28,72 @@ class _PhotoAppState extends State<PhotoApp> {
         title: Text('相机'),
         leading: BackButton(),
       ),
-      body: Center(child: _image == null ? Text('没有选照片') : Image.file(_image)),
+//      body: Center(child: _image == null ? Text('没有选照片') : Image.file(_image)),
+      body: Center(
+        child: Wrap(
+          spacing: 5,
+          runSpacing: 5,
+          children: _genImages(),
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
-        onPressed: getImage,
+        onPressed: _pickImage,
         tooltip: '选照片',
         child: Icon(Icons.add_a_photo),
       ),
     );
+  }
+
+  void _pickImage() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) => Container(
+              height: 160,
+              child: Column(
+                children: <Widget>[
+                  _item('拍照', true),
+                  _item('从相册选择', false),
+                ],
+              ),
+            ));
+  }
+
+  _item(String title, bool isTakePhoto) {
+    return GestureDetector(
+      child: ListTile(
+        leading: Icon(isTakePhoto ? Icons.camera_alt : Icons.photo_library),
+        title: Text(title),
+        onTap: () => getImage(isTakePhoto),
+      ),
+    );
+  }
+
+  _genImages() {
+    _images.map((file) {
+      return Stack(
+        children: <Widget>[
+          ClipRRect(
+            borderRadius:BorderRadius.circular(5),
+            child: Image.file(file,width: 120,height: 90,fit: BoxFit.fill,),
+        ),
+          Positioned(
+            right: 5,
+            top: 5,
+            child: GestureDetector(
+              onTap: (){
+                setState(() {
+                  _images.remove(file);
+                });
+              },
+              child: ClipOval(
+                child: Container(
+                  padding: Ed,
+                ),
+              ),
+            ),
+          )
+        ],
+      );
+    });
   }
 }
