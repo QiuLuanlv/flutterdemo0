@@ -69,7 +69,7 @@ class _PhotoAppState extends State<PhotoApp> {
   }
 
   _genImages() {
-    _images.map((file) {
+    return _images.map((file) {
       return Stack(
         children: <Widget>[
           ClipRRect(
@@ -87,13 +87,15 @@ class _PhotoAppState extends State<PhotoApp> {
               },
               child: ClipOval(
                 child: Container(
-                  padding: Ed,
+                  padding: EdgeInsets.all(3),
+                  decoration: BoxDecoration(color: Colors.black54),
+                  child: Icon(Icons.close,size: 18,color: Colors.white,),
                 ),
               ),
             ),
           )
         ],
       );
-    });
+    }).toList();
   }
 }
