@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/dao/home_dao.dart';
+import 'package:flutter_demo/model/home_model.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 const APPBAR_SCROLL_OFFSET=100;
 class HomePage extends StatefulWidget{
@@ -14,6 +18,14 @@ class _HomePageState extends State<HomePage>{
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2127793287,3926661110&fm=26&gp=0.jpg',
   ];
   double appBarAplha=0;
+  String resultString='';
+
+  @override
+  void initState(){
+    super.initState();
+    loadData();
+  }
+
   _onScroll(offset){
     double alpha=offset/APPBAR_SCROLL_OFFSET;
     if(alpha<0){
@@ -26,6 +38,34 @@ class _HomePageState extends State<HomePage>{
     });
 
   }
+
+//  loadData(){
+//    HomeDao.fetch().then((result){
+//      setState(() {
+//        resultString =json.encode(result);
+//      });
+//    }).catchError((onError){
+//      setState(() {
+//        resultString =onError.toString();
+//      });
+//    });
+//  }
+
+  loadData() async{
+    try{
+      HomeModel model=await HomeDao.fetch();
+      setState(() {
+        resultString =json.encode(model.config);
+      });
+    }catch(e){
+      setState(() {
+        resultString =e.toString();
+      });
+    }
+
+    print('打印返回：：${resultString}');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +102,7 @@ class _HomePageState extends State<HomePage>{
                     Container(
                       height: 800,
                       child: ListTile(
-                        title: Text('hahahahah???'),
+                        title: Text(resultString),
                       ),
                     ),
                   ],

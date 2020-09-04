@@ -41,11 +41,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: TabNavigator(),
-//      home: Scaffold(
-//        appBar: AppBar(
-//          title: Text('future/futurebuilder'),
-//        ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('future/futurebuilder'),
+        ),
 
         //-------------------------------------------
 //        body: FutureBuilder<CommonModel>(
@@ -76,7 +75,7 @@ class _MyAppState extends State<MyApp> {
 //              }
 //          }
 //        }),
-        //--------------------------------------
+      //--------------------------------------
 //        body: Column(
 //          children: <Widget>[
 //            InkWell(
@@ -100,8 +99,8 @@ class _MyAppState extends State<MyApp> {
 //            children:  _buildList(),
 //          ),
 //        ),
-//        body: GridView.count(crossAxisCount: 2,children: _buildGrid(),),
-//      ),
+          body: GridView.count(crossAxisCount: 2,children: _buildGrid(),),
+      ),
     );
   }
 
@@ -120,7 +119,7 @@ class _MyAppState extends State<MyApp> {
 
   Widget _itemGrid(String city){
     return Container(
-//      height: 20,
+      height: 20,
       margin: EdgeInsets.only(bottom: 5),
       alignment: Alignment.center,
       decoration: BoxDecoration(color: Colors.lightBlueAccent),
@@ -133,11 +132,11 @@ class _MyAppState extends State<MyApp> {
 
   Widget _item(String city,List<String> subCities){
     return ExpansionTile(
-      title: Text(
-        city,
-        style: TextStyle(color: Colors.blueAccent,fontSize: 20),
-      ),
-      children: subCities.map((subCity) => _buildSub(subCity)).toList(),
+        title: Text(
+          city,
+          style: TextStyle(color: Colors.blueAccent,fontSize: 20),
+        ),
+        children: subCities.map((subCity) => _buildSub(subCity)).toList(),
     );
 
 
@@ -147,7 +146,7 @@ class _MyAppState extends State<MyApp> {
     return FractionallySizedBox(
       widthFactor: 1,
       child: Container(
-//        height: 50,
+        height: 50,
         margin: EdgeInsets.only(bottom: 5),
         decoration: BoxDecoration(color: Colors.lightBlueAccent),
         child:Text(subCity),
